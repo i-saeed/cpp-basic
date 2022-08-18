@@ -2,7 +2,6 @@
 #define _DOUBLE_LINKED_LIST_H
 
 #include <exception>
-#include <iostream>
 #include <stdexcept>
 
 namespace double_linked_list {

@@ -2,7 +2,6 @@
 #define _LINKED_LIST_H
 
 #include <exception>
-#include <iostream>
 #include <stdexcept>
 
 namespace linked_list {
