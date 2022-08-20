@@ -10,7 +10,7 @@ namespace linked_list {
 template <typename T>
 class Node {
   public:
-    T value;
+    T     value;
     Node* prev{nullptr};
 };
 
@@ -79,13 +79,13 @@ template <typename T>
 auto LinkedList<T>::push(T value) -> void {
 
     if (!head) {
-        head = new Node<T>;
+        head        = new Node<T>;
         head->value = value;
     } else {
-        auto temp = new Node<T>;
+        auto temp   = new Node<T>;
         temp->value = value;
-        temp->prev = head;
-        head = temp;
+        temp->prev  = head;
+        head        = temp;
     }
     len++;
 }
@@ -99,9 +99,9 @@ auto LinkedList<T>::pop() -> T {
         value = head->value;
         delete head;
     } else {
-        value = head->value;
+        value     = head->value;
         auto temp = head;
-        head = head->prev;
+        head      = head->prev;
         delete temp;
     }
     len--;
@@ -131,14 +131,14 @@ auto LinkedList<T>::reverse() -> void {
     if (head && (head->prev)) {
 
         auto prev_iter = static_cast<Node<T>*>(nullptr);
-        auto iter = head;
-        auto tmp = iter->prev;
+        auto iter      = head;
+        auto tmp       = iter->prev;
 
         while (iter) {
-            tmp = iter->prev;
+            tmp        = iter->prev;
             iter->prev = prev_iter;
-            prev_iter = iter;
-            iter = tmp;
+            prev_iter  = iter;
+            iter       = tmp;
         }
 
         head = prev_iter;
