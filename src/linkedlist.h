@@ -59,6 +59,8 @@ auto LinkedList<T>::operator=(const LinkedList<T>& other) -> LinkedList<T>& {
     if (this == &other)
         return *this;
 
+    clear();
+
     auto other_head = other.head;
     while (other_head) {
         push(other_head->value);
@@ -173,7 +175,7 @@ auto mergeTwoLists(const linked_list::LinkedList<T>& list_a,
 
     if (!iter_a && !iter_b) {
         std::cout << "Both are empty" << std::endl;
-        return merge_list;
+        return LinkedList<T>();
     } else if (!iter_a) {
         std::cout << "Iter a is empty" << std::endl;
         return list_b;
