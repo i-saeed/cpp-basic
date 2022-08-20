@@ -18,7 +18,6 @@ template <typename T>
 class LinkedList {
   private:
     Node<T>* head{nullptr};
-    Node<T>* root{nullptr};
     size_t len{0};
 
   public:
@@ -43,7 +42,7 @@ class LinkedList {
 
 template <typename T>
 auto LinkedList<T>::peek() -> T {
-    if (!root) {
+    if (!head) {
         throw std::runtime_error("Empty LinkedList, cannot pop more");
     }
     return head->value;
@@ -52,10 +51,9 @@ auto LinkedList<T>::peek() -> T {
 template <typename T>
 auto LinkedList<T>::push(T value) -> void {
 
-    if (!root) {
-        root = new Node<T>;
-        root->value = value;
-        head = root;
+    if (!head) {
+        head = new Node<T>;
+        head->value = value;
     } else {
         auto temp = new Node<T>;
         temp->value = value;
@@ -68,12 +66,11 @@ auto LinkedList<T>::push(T value) -> void {
 template <typename T>
 auto LinkedList<T>::pop() -> T {
     T value;
-    if (!root) {
+    if (!head) {
         throw std::runtime_error("Empty LinkedList, cannot pop more");
-    } else if (root == head) {
+    } else if ((!head->prev)) {
         value = head->value;
-        delete root;
-        head = nullptr;
+        delete head;
     } else {
         value = head->value;
         auto temp = head;
@@ -104,7 +101,7 @@ auto LinkedList<T>::clear() -> void {
 template <typename T>
 auto LinkedList<T>::reverse() -> void {
 
-    if (root && (head->prev)) {
+    if (head && (head->prev)) {
 
         auto prev_iter = static_cast<Node<T>*>(nullptr);
         auto iter = head;
@@ -117,8 +114,6 @@ auto LinkedList<T>::reverse() -> void {
             iter = tmp;
         }
 
-        root = head;
-        root->prev = nullptr;
         head = prev_iter;
     }
 }
