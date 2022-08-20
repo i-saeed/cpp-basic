@@ -123,6 +123,7 @@ auto LinkedList<T>::clear() -> void {
     while (!empty()) {
         pop();
     }
+    head = nullptr;
 }
 
 template <typename T>
