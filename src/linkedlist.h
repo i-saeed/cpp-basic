@@ -24,16 +24,22 @@ class LinkedList {
   public:
     auto push(T value) -> void;
     auto pop() -> T;
-    auto empty() -> bool;
+    auto empty() const -> bool;
     auto clear() -> void;
-    auto size() -> size_t;
+    auto size() const -> size_t;
     auto peek() -> T;
     ~LinkedList();
     auto reverse() -> void;
+    auto getHead() -> Node<T>*;
 
     template <typename t>
     friend std::ostream& operator<<(std::ostream& os,
                                     const LinkedList<t>& list);
+
+    template <typename t>
+    friend auto mergeTwoLists(const linked_list::LinkedList<t>& list_a,
+                              const linked_list::LinkedList<t>& list_b)
+        -> linked_list::LinkedList<t>;
 };
 
 template <typename T>
@@ -80,12 +86,12 @@ auto LinkedList<T>::pop() -> T {
 }
 
 template <typename T>
-auto LinkedList<T>::empty() -> bool {
+auto LinkedList<T>::empty() const -> bool {
     return (len != 0) ? false : true;
 }
 
 template <typename T>
-auto LinkedList<T>::size() -> size_t {
+auto LinkedList<T>::size() const -> size_t {
     return len;
 }
 
@@ -124,6 +130,11 @@ LinkedList<T>::~LinkedList() {
 }
 
 template <typename T>
+auto LinkedList<T>::getHead() -> Node<T>* {
+    return head;
+}
+
+template <typename T>
 std::ostream& operator<<(std::ostream& os, const LinkedList<T>& list) {
     auto iter = list.head;
     while (iter) {
@@ -131,6 +142,18 @@ std::ostream& operator<<(std::ostream& os, const LinkedList<T>& list) {
         iter = iter->prev;
     }
     return os;
+}
+
+template <typename T>
+auto mergeTwoLists(const linked_list::LinkedList<T>& list_a,
+                   const linked_list::LinkedList<T>& list_b)
+    -> linked_list::LinkedList<T> {
+
+    LinkedList<T> merge_list;
+    auto head_a = list_a.head;
+    auto head_b = list_b.head;
+    // merge_list.push(50);
+    return merge_list;
 }
 
 } // namespace linked_list

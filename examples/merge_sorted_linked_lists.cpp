@@ -2,17 +2,6 @@
 
 #include <iostream>
 
-template <typename T>
-auto mergeTwoLists(const linked_list::LinkedList<T>& list_a,
-                   const linked_list::LinkedList<T>& list_b)
-    -> linked_list::LinkedList<T> {
-
-    using namespace linked_list;
-    LinkedList<T> merge_list;
-    merge_list.push(50);
-    return merge_list;
-}
-
 auto main(int argc, char** argv) -> int {
 
     using namespace linked_list;
@@ -44,14 +33,10 @@ auto main(int argc, char** argv) -> int {
     merged_list.reverse();
     std::cout << "Size of reversed after reverse:  " << merged_list.size()
               << std::endl;
-    do {
-        std::cout << merged_list.pop() << ", ";
-    } while (!merged_list.empty());
-
-    std::cout << std::endl;
 
     std::cout << "Printing linked list1:  " << l1 << std::endl;
     std::cout << "Printing linked list2:  " << l2 << std::endl;
+    std::cout << "Printing merged_list:  " << merged_list << std::endl;
 
     return 0;
 }
