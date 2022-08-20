@@ -34,6 +34,11 @@ auto main(int argc, char** argv) -> int {
     std::cout << "Printing merged_list:  " << merged_list << std::endl;
 
     l1.clear();
+    std::cout << "Printing linked list1:  " << l1 << std::endl;
+    std::cout << "Printing linked list2:  " << l2 << std::endl;
+    merged_list = mergeTwoLists(l1, l2);
+    std::cout << "Printing merged_list:  " << merged_list << std::endl;
+
     l2.clear();
     std::cout << "Printing linked list1:  " << l1 << std::endl;
     std::cout << "Printing linked list2:  " << l2 << std::endl;
