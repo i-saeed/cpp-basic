@@ -28,6 +28,7 @@ class LinkedList {
     auto size() -> size_t;
     auto peek() -> T;
     ~LinkedList();
+    auto reverse() -> void;
 };
 
 template <typename T>
@@ -87,6 +88,39 @@ template <typename T>
 auto LinkedList<T>::clear() -> void {
     while (!empty()) {
         pop();
+    }
+}
+
+template <typename T>
+auto LinkedList<T>::reverse() -> void {
+
+    if (head) {
+        auto iter = head;
+        Node<T>* prev_iter{nullptr};
+
+        while (true) {
+            if (iter->prev) {
+
+                auto temp = iter->prev;
+                iter->prev = prev_iter;
+                if (temp->prev) {
+                    auto temp2 = temp->prev;
+                    temp->prev = iter;
+                    prev_iter = temp;
+                    iter = temp2;
+                } else {
+                    temp->prev = iter;
+                    iter = temp;
+                    break;
+                }
+            } else {
+                iter->prev = prev_iter;
+                break;
+            }
+        }
+        root = head;
+        root->prev = nullptr;
+        head = iter;
     }
 }
 
