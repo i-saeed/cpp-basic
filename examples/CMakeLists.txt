@@ -21,3 +21,21 @@ target_link_libraries(
   PRIVATE
     basic_data_structures
 )
+
+
+#################################
+add_executable(reverse_linkedlist
+  reverse_linkedlist.cpp
+)
+
+add_dependencies(reverse_linkedlist basic_data_structures)
+target_link_libraries(
+    reverse_linkedlist
+  PRIVATE
+    basic_data_structures
+)
+
+target_compile_options(reverse_linkedlist
+  PUBLIC
+  -g3
+)
