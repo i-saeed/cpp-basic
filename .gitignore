@@ -1,3 +1,7 @@
+##### Build and install folder
+build/
+install/
+
 ##### Emacs
 *~undo-tree~
 .\#*
