@@ -1,5 +1,4 @@
 #include <exception>
-#include <iostream>
 #include <stdexcept>
 
 template <typename T>
