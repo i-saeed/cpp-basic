@@ -2,6 +2,7 @@
 #define _LINKED_LIST_H
 
 #include <exception>
+#include <iostream>
 #include <stdexcept>
 
 namespace linked_list {
@@ -29,6 +30,10 @@ class LinkedList {
     auto peek() -> T;
     ~LinkedList();
     auto reverse() -> void;
+
+    template <typename t>
+    friend std::ostream& operator<<(std::ostream& os,
+                                    const LinkedList<t>& list);
 };
 
 template <typename T>
@@ -116,6 +121,16 @@ auto LinkedList<T>::reverse() -> void {
 template <typename T>
 LinkedList<T>::~LinkedList() {
     clear();
+}
+
+template <typename T>
+std::ostream& operator<<(std::ostream& os, const LinkedList<T>& list) {
+    auto iter = list.head;
+    while (iter) {
+        os << iter->value << ", ";
+        iter = iter->prev;
+    }
+    return os;
 }
 
 } // namespace linked_list
