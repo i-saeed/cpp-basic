@@ -166,10 +166,51 @@ auto mergeTwoLists(const linked_list::LinkedList<T>& list_a,
                    const linked_list::LinkedList<T>& list_b)
     -> linked_list::LinkedList<T> {
 
+    auto iter_a = list_a.head;
+    auto iter_b = list_b.head;
+
     LinkedList<T> merge_list;
-    auto head_a = list_a.head;
-    auto head_b = list_b.head;
-    // merge_list.push(50);
+
+    if (!iter_a && !iter_b) {
+        std::cout << "Both are empty" << std::endl;
+        return merge_list;
+    } else if (!iter_a) {
+        std::cout << "Iter a is empty" << std::endl;
+        return list_b;
+    } else if (!iter_b) {
+        std::cout << "Iter b is empty" << std::endl;
+        return list_a;
+    }
+
+    auto iter_m      = merge_list.head;
+    auto iter_copy   = static_cast<Node<T>*>(nullptr);
+    auto iter_m_prev = static_cast<Node<T>*>(nullptr);
+
+    auto comparator = bool{false};
+
+    while (iter_a || iter_b) {
+        auto tmp = new Node<T>;
+
+        if (!iter_a || !iter_b) {
+            comparator = (iter_a);
+        } else {
+            comparator = (iter_a->value <= iter_b->value);
+        }
+
+        iter_copy = comparator ? iter_a : iter_b;
+
+        iter_a = comparator ? iter_a->prev : iter_a;
+        iter_b = (!comparator) ? iter_b->prev : iter_b;
+
+        tmp->value   = iter_copy->value;
+        iter_m       = tmp;
+        iter_m->prev = iter_m_prev;
+        iter_m_prev  = iter_m;
+    }
+    merge_list.head = iter_m;
+
+    merge_list.reverse();
+
     return merge_list;
 }
 
