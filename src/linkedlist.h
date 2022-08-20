@@ -18,20 +18,25 @@ template <typename T>
 class LinkedList {
   private:
     Node<T>* head{nullptr};
-    size_t len{0};
+    size_t   len{0};
 
   public:
+    LinkedList() = default;
+
+    LinkedList(const LinkedList<T>& other);
+    auto operator=(const LinkedList<T>& other) -> LinkedList<T>&;
+    ~LinkedList();
+
     auto push(T value) -> void;
     auto pop() -> T;
     auto empty() const -> bool;
     auto clear() -> void;
     auto size() const -> size_t;
     auto peek() -> T;
-    ~LinkedList();
     auto reverse() -> void;
 
     template <typename t>
-    friend std::ostream& operator<<(std::ostream& os,
+    friend std::ostream& operator<<(std::ostream&        os,
                                     const LinkedList<t>& list);
 
     template <typename t>
@@ -39,6 +44,28 @@ class LinkedList {
                               const linked_list::LinkedList<t>& list_b)
         -> linked_list::LinkedList<t>;
 };
+
+template <typename T>
+LinkedList<T>::LinkedList(const LinkedList<T>& other) {
+    auto other_head = other.head;
+    while (other_head) {
+        push(other_head->value);
+        other_head = other_head->prev;
+    }
+}
+
+template <typename T>
+auto LinkedList<T>::operator=(const LinkedList<T>& other) -> LinkedList<T>& {
+    if (this == &other)
+        return *this;
+
+    auto other_head = other.head;
+    while (other_head) {
+        push(other_head->value);
+        other_head = other_head->prev;
+    }
+    return *this;
+}
 
 template <typename T>
 auto LinkedList<T>::peek() -> T {
