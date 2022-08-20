@@ -30,7 +30,6 @@ class LinkedList {
     auto peek() -> T;
     ~LinkedList();
     auto reverse() -> void;
-    auto getHead() -> Node<T>*;
 
     template <typename t>
     friend std::ostream& operator<<(std::ostream& os,
@@ -127,11 +126,6 @@ auto LinkedList<T>::reverse() -> void {
 template <typename T>
 LinkedList<T>::~LinkedList() {
     clear();
-}
-
-template <typename T>
-auto LinkedList<T>::getHead() -> Node<T>* {
-    return head;
 }
 
 template <typename T>
