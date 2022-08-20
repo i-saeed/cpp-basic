@@ -18,11 +18,9 @@ auto main(int argc, char** argv) -> int {
     l.push(77);
     l.push(78);
 
+    std::cout << "Size of list:  " << l.size() << std::endl;
     l.reverse();
-    // l.reverse();
-
-    std::cout << "\n------------  Done with reversing\n";
-
+    std::cout << "Size of reversed after reverse:  " << l.size() << std::endl;
     do {
         std::cout << l.pop() << ", ";
     } while (!l.empty());

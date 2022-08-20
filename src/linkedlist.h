@@ -94,33 +94,22 @@ auto LinkedList<T>::clear() -> void {
 template <typename T>
 auto LinkedList<T>::reverse() -> void {
 
-    if (head) {
+    if (root && (head->prev)) {
+
+        auto prev_iter = static_cast<Node<T>*>(nullptr);
         auto iter = head;
-        Node<T>* prev_iter{nullptr};
+        auto tmp = iter->prev;
 
-        while (true) {
-            if (iter->prev) {
-
-                auto temp = iter->prev;
-                iter->prev = prev_iter;
-                if (temp->prev) {
-                    auto temp2 = temp->prev;
-                    temp->prev = iter;
-                    prev_iter = temp;
-                    iter = temp2;
-                } else {
-                    temp->prev = iter;
-                    iter = temp;
-                    break;
-                }
-            } else {
-                iter->prev = prev_iter;
-                break;
-            }
+        while (iter) {
+            tmp = iter->prev;
+            iter->prev = prev_iter;
+            prev_iter = iter;
+            iter = tmp;
         }
+
         root = head;
         root->prev = nullptr;
-        head = iter;
+        head = prev_iter;
     }
 }
 
