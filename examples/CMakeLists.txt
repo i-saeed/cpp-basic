@@ -33,15 +33,25 @@ target_link_libraries(
 #################################
 add_executable(merge_sorted_linked_lists merge_sorted_linked_lists.cpp)
 
-add_dependencies(merge_sorted_linked_lists merge_sorted_linked_lists)
+add_dependencies(merge_sorted_linked_lists basic_data_structures)
 target_link_libraries(
     merge_sorted_linked_lists
   PRIVATE
     basic_data_structures
 )
 
+#################################
+add_executable(cycle_linked_list cycle_linked_list.cpp)
+
+add_dependencies(cycle_linked_list  basic_data_structures)
+target_link_libraries(
+    cycle_linked_list
+  PRIVATE
+    basic_data_structures
+)
+
 target_compile_options(
-  merge_sorted_linked_lists
+  cycle_linked_list
   PUBLIC
   -g3
 )
