@@ -2,6 +2,8 @@
 #define _UTILS_H
 
 #include <algorithm>
+#include <string>
+#include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
@@ -19,7 +21,15 @@ auto containsDuplicate(const std::vector<T>& nums) -> bool {
         }
         return contains;
     });
-};
+}
+
+auto createStringMap(const std::string& s) -> std::unordered_map<char, size_t>;
+
+auto isAnagram(const std::string& s, const std::string& t) -> bool {
+    auto s_map = createStringMap(s);
+    auto t_map = createStringMap(t);
+    return s_map == t_map;
+}
 
 } // namespace utils
 
