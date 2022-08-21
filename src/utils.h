@@ -25,11 +25,7 @@ auto containsDuplicate(const std::vector<T>& nums) -> bool {
 
 auto createStringMap(const std::string& s) -> std::unordered_map<char, size_t>;
 
-auto isAnagram(const std::string& s, const std::string& t) -> bool {
-    auto s_map = createStringMap(s);
-    auto t_map = createStringMap(t);
-    return s_map == t_map;
-}
+auto isAnagram(const std::string& s, const std::string& t) -> bool;
 
 } // namespace utils
 

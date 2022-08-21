@@ -16,4 +16,13 @@ auto createStringMap(const std::string& s) -> std::unordered_map<char, size_t> {
     return map;
 }
 
+auto isAnagram(const std::string& s, const std::string& t) -> bool {
+    if (s.size() != t.size())
+        return false;
+
+    auto s_map = createStringMap(s);
+    auto t_map = createStringMap(t);
+    return s_map == t_map;
+}
+
 } // namespace utils
