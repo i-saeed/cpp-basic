@@ -68,6 +68,7 @@ class LinkedList {
     auto size() const -> size_t;
     auto peek() -> T;
     auto reverse() -> void;
+    auto hasCycleViaHashSet() -> bool;
     auto hasCycle() -> bool;
 
     template <typename t>
@@ -182,9 +183,29 @@ auto LinkedList<T>::reverse() -> void {
         head = prev_iter;
     }
 }
-
 template <typename T>
 auto LinkedList<T>::hasCycle() -> bool {
+    if (!head || !(head->prev))
+        return false;
+
+    auto exists = bool{false};
+
+    auto slow = head;
+    auto fast = head;
+
+    while ((fast->prev) && (fast->prev->prev)) {
+        slow = slow->prev;
+        fast = fast->prev->prev;
+        if (slow == fast) {
+            exists = true;
+            break;
+        }
+    }
+    return exists;
+}
+
+template <typename T>
+auto LinkedList<T>::hasCycleViaHashSet() -> bool {
 
     if (!head || !(head->prev))
         return false;

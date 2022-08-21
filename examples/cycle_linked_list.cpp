@@ -38,10 +38,10 @@ auto main(int argc, char** argv) -> int {
     l.push(5);
     std::cout << "Printing linked list:  " << l << std::endl;
 
-    std::cout << "linked list has a cycle:  " << std::boolalpha << l.hasCycle()
-              << std::endl;
+    std::cout << "linked list has a cycle:  " << std::boolalpha
+              << l.hasCycleViaHashSet() << std::endl;
 
-    assert(!l.hasCycle());
+    assert(!l.hasCycleViaHashSet());
 
     l.clear();
     l.push(3);
@@ -52,10 +52,10 @@ auto main(int argc, char** argv) -> int {
     l.push(0);
 
     std::cout << "Printing linked list:  " << l << std::endl;
-    std::cout << "linked list has a cycle:  " << std::boolalpha << l.hasCycle()
-              << std::endl;
+    std::cout << "linked list has a cycle:  " << std::boolalpha
+              << l.hasCycleViaHashSet() << std::endl;
 
-    assert(l.hasCycle());
+    assert(l.hasCycleViaHashSet());
 
     return 0;
 }
