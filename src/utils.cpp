@@ -1,6 +1,7 @@
 #include "utils.h"
-#include <iostream>
+#include <algorithm>
 #include <stdexcept>
+#include <unordered_map>
 
 namespace utils {
 
@@ -29,20 +30,22 @@ auto isAnagram(const std::string& s, const std::string& t) -> bool {
 auto twoSum(const std::vector<int>& nums, int target) -> std::vector<int> {
     std::vector<int> sum_indices(2);
 
-    auto found = bool{false};
+    std::unordered_map<int, int> map;
 
-    for (size_t i = 0; i < nums.size(); ++i) {
-        for (auto j = i + 1; j < nums.size(); ++j) {
-            if (nums[i] + nums[j] == target) {
-                sum_indices[0] = i;
-                sum_indices[1] = j;
-                found          = true;
-                break;
-            }
-        }
-        if (found)
-            break;
-    }
+    auto found =
+        std::any_of(begin(nums), end(nums),
+                    [&map, &sum_indices, target, i = 0](const auto n) mutable {
+                        auto diff = target - n;
+                        auto loc  = map.find(diff);
+                        if (loc == map.end()) {
+                            map.insert({n, i++});
+                        } else {
+
+                            sum_indices = std::vector<int>{loc->second, i++};
+                        }
+                        return loc != map.end();
+                    });
+
     if (!found)
         throw std::runtime_error("Could not find twoSum solution");
 
