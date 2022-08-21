@@ -201,13 +201,10 @@ auto mergeTwoLists(const linked_list::LinkedList<T>& list_a,
     LinkedList<T> merge_list;
 
     if (!iter_a && !iter_b) {
-        std::cout << "Both are empty" << std::endl;
         return LinkedList<T>();
     } else if (!iter_a) {
-        std::cout << "Iter a is empty" << std::endl;
         return list_b;
     } else if (!iter_b) {
-        std::cout << "Iter b is empty" << std::endl;
         return list_a;
     }
 
@@ -237,8 +234,6 @@ auto mergeTwoLists(const linked_list::LinkedList<T>& list_a,
         iter_m_prev  = iter_m;
     }
     merge_list.head = iter_m;
-
-    merge_list.reverse();
 
     return merge_list;
 }
