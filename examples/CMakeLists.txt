@@ -95,3 +95,13 @@ target_link_libraries(
   PRIVATE
     utils
 )
+
+#################################
+add_executable(valid_parentheses valid_parentheses.cpp)
+
+add_dependencies(valid_parentheses utils)
+target_link_libraries(
+    valid_parentheses
+  PRIVATE
+    utils
+)

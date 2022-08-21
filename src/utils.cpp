@@ -1,6 +1,7 @@
 #include "utils.h"
 #include <algorithm>
 #include <iterator>
+#include <stack>
 #include <stdexcept>
 #include <unordered_map>
 
@@ -72,6 +73,29 @@ auto isPalindrome(const std::string& s) -> bool {
         condition = (*start++ == *end--);
     }
     return condition;
+}
+
+auto areValidParentheses(const std::string& s) -> bool {
+
+    std::stack<char> store;
+
+    auto removed_matching =
+        std::all_of(begin(s), end(s), [&store](const auto& c) {
+            if ((c == '{') || (c == '(') || (c == '[')) {
+                store.push(c);
+            } else if ((c == '}') || (c == ')') || (c == ']')) {
+                auto c_match = store.top();
+                store.pop();
+                if (c == '}')
+                    return (c_match == '{');
+                else if (c == ')')
+                    return (c_match == '(');
+                else
+                    return (c_match == '[');
+            }
+            return true;
+        });
+    return removed_matching && store.empty();
 }
 
 } // namespace utils
