@@ -65,3 +65,13 @@ target_link_libraries(
   PRIVATE
     utils
 )
+
+#################################
+add_executable(checks_anagram checks_anagram.cpp)
+
+add_dependencies(checks_anagram  utils)
+target_link_libraries(
+    checks_anagram
+  PRIVATE
+    utils
+)
