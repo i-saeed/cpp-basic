@@ -27,6 +27,8 @@ auto createStringMap(const std::string& s) -> std::unordered_map<char, size_t>;
 
 auto isAnagram(const std::string& s, const std::string& t) -> bool;
 
+auto twoSum(const std::vector<int>& nums, int target) -> std::vector<int>;
+
 } // namespace utils
 
 #endif

@@ -75,3 +75,13 @@ target_link_libraries(
   PRIVATE
     utils
 )
+
+#################################
+add_executable(two_sums two_sums.cpp)
+
+add_dependencies(two_sums  utils)
+target_link_libraries(
+    two_sums
+  PRIVATE
+    utils
+)

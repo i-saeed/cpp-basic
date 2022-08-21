@@ -1,5 +1,6 @@
 #include "utils.h"
 #include <iostream>
+#include <stdexcept>
 
 namespace utils {
 
@@ -23,6 +24,29 @@ auto isAnagram(const std::string& s, const std::string& t) -> bool {
     auto s_map = createStringMap(s);
     auto t_map = createStringMap(t);
     return s_map == t_map;
+}
+
+auto twoSum(const std::vector<int>& nums, int target) -> std::vector<int> {
+    std::vector<int> sum_indices(2);
+
+    auto found = bool{false};
+
+    for (size_t i = 0; i < nums.size(); ++i) {
+        for (auto j = i + 1; j < nums.size(); ++j) {
+            if (nums[i] + nums[j] == target) {
+                sum_indices[0] = i;
+                sum_indices[1] = j;
+                found          = true;
+                break;
+            }
+        }
+        if (found)
+            break;
+    }
+    if (!found)
+        throw std::runtime_error("Could not find twoSum solution");
+
+    return sum_indices;
 }
 
 } // namespace utils
