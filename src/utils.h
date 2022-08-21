@@ -29,6 +29,8 @@ auto isAnagram(const std::string& s, const std::string& t) -> bool;
 
 auto twoSum(const std::vector<int>& nums, int target) -> std::vector<int>;
 
+auto isPalindrome(const std::string& s) -> bool;
+
 } // namespace utils
 
 #endif

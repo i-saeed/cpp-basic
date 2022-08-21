@@ -1,5 +1,6 @@
 #include "utils.h"
 #include <algorithm>
+#include <iterator>
 #include <stdexcept>
 #include <unordered_map>
 
@@ -50,6 +51,27 @@ auto twoSum(const std::vector<int>& nums, int target) -> std::vector<int> {
         throw std::runtime_error("Could not find twoSum solution");
 
     return sum_indices;
+}
+
+auto isPalindrome(const std::string& s) -> bool {
+    std::string str;
+    std::copy_if(begin(s), end(s), std::back_inserter(str), [](const auto& c) {
+        return (((c >= '0') && (c <= '9')) || ((c >= 'A') && (c <= 'Z')) ||
+                ((c >= 'a') && (c <= 'z')));
+    });
+    std::for_each(begin(str), end(str), [](auto& c) { c = std::tolower(c); });
+
+    if (str.empty())
+        return true;
+
+    auto start = str.data();
+    auto end   = start + str.size() - 1;
+
+    auto condition = bool{true};
+    while (start < end && condition) {
+        condition = (*start++ == *end--);
+    }
+    return condition;
 }
 
 } // namespace utils

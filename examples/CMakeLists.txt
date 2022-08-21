@@ -85,3 +85,13 @@ target_link_libraries(
   PRIVATE
     utils
 )
+
+#################################
+add_executable(palindrome palindrome.cpp)
+
+add_dependencies(palindrome  utils)
+target_link_libraries(
+    palindrome
+  PRIVATE
+    utils
+)
