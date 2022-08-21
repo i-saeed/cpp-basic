@@ -55,3 +55,13 @@ target_compile_options(
   PUBLIC
   -g3
 )
+
+#################################
+add_executable(contains_duplicate contains_duplicate.cpp)
+
+add_dependencies(contains_duplicate  utils)
+target_link_libraries(
+    contains_duplicate
+  PRIVATE
+    utils
+)

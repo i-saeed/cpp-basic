@@ -16,6 +16,19 @@ target_include_directories(basic_data_structures
     $<INSTALL_INTERFACE:>  # <prefix>/include/mylib
   )
 
+#########################################
+add_library(
+    utils
+    INTERFACE
+    utils.h
+)
+
+target_include_directories(utils
+  INTERFACE
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+    $<INSTALL_INTERFACE:>  # <prefix>/include/mylib
+  )
+
 
 # target_sources(myHeaderOnly
 #     PUBLIC
