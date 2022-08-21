@@ -1,10 +1,14 @@
 #ifndef _LINKED_LIST_H
 #define _LINKED_LIST_H
 
+#include <cstddef>
 #include <exception>
+#include <functional> // hash
 #include <iostream>
+#include <limits>
 #include <stdexcept>
 #include <unordered_set>
+#include <utility>
 
 namespace linked_list {
 
@@ -13,6 +17,35 @@ class Node {
   public:
     T     value;
     Node* prev{nullptr};
+};
+
+struct hashNode {
+    template <typename T>
+    // auto operator()(const Node<T>& n) const noexcept -> size_t {
+    auto operator()(const Node<T>& n) const -> size_t {
+        using func       = std::hash<T>;
+        auto invalid_val = std::numeric_limits<T>::max();
+
+        auto h1 = func{}(n.value);
+        auto h2 = (n.prev) ? func{}(n.value) : func{}(invalid_val);
+        return h1 ^ (h2 << 1);
+    }
+};
+
+struct equalNode {
+    template <typename T>
+    auto operator()(const Node<T>& n1, const Node<T>& n2) const -> bool {
+        if (n1.value != n2.value)
+            return false;
+        if ((!n1.prev) && (!n2.prev))
+            return true;
+        else if (!n1.prev)
+            return false;
+        else if (!n2.prev)
+            return false;
+
+        return (n1.prev->value == n2.prev->value);
+    }
 };
 
 template <typename T>
@@ -156,18 +189,17 @@ auto LinkedList<T>::hasCycle() -> bool {
     if (!head || !(head->prev))
         return false;
 
-    std::unordered_set<T> history;
+    std::unordered_set<Node<T>, hashNode, equalNode> history;
 
     auto exists = bool{false};
 
     auto iter = head;
     while (iter) {
-        const auto current_val = iter->value;
-        if (history.count(current_val)) {
+        if (history.count(*iter)) {
             exists = true;
             break;
         } else {
-            history.insert(current_val);
+            history.insert(*iter);
         }
         iter = iter->prev;
     }
