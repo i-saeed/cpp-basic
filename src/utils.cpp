@@ -84,6 +84,9 @@ auto areValidParentheses(const std::string& s) -> bool {
             if ((c == '{') || (c == '(') || (c == '[')) {
                 store.push(c);
             } else if ((c == '}') || (c == ')') || (c == ']')) {
+                if (store.empty())
+                    return false;
+
                 auto c_match = store.top();
                 store.pop();
                 if (c == '}')
