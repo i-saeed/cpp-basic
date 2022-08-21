@@ -4,6 +4,7 @@
 #include <exception>
 #include <iostream>
 #include <stdexcept>
+#include <unordered_set>
 
 namespace linked_list {
 
@@ -34,6 +35,7 @@ class LinkedList {
     auto size() const -> size_t;
     auto peek() -> T;
     auto reverse() -> void;
+    auto hasCycle() -> bool;
 
     template <typename t>
     friend std::ostream& operator<<(std::ostream&        os,
@@ -146,6 +148,31 @@ auto LinkedList<T>::reverse() -> void {
 
         head = prev_iter;
     }
+}
+
+template <typename T>
+auto LinkedList<T>::hasCycle() -> bool {
+
+    if (!head || !(head->prev))
+        return false;
+
+    std::unordered_set<T> history;
+
+    auto exists = bool{false};
+
+    auto iter = head;
+    while (iter) {
+        const auto current_val = iter->value;
+        if (history.count(current_val)) {
+            exists = true;
+            break;
+        } else {
+            history.insert(current_val);
+        }
+        iter = iter->prev;
+    }
+
+    return exists;
 }
 
 template <typename T>
