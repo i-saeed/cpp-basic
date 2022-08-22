@@ -55,3 +55,63 @@ target_compile_options(
   PUBLIC
   -g3
 )
+
+#################################
+add_executable(contains_duplicate contains_duplicate.cpp)
+
+add_dependencies(contains_duplicate  utils)
+target_link_libraries(
+    contains_duplicate
+  PRIVATE
+    utils
+)
+
+#################################
+add_executable(checks_anagram checks_anagram.cpp)
+
+add_dependencies(checks_anagram  utils)
+target_link_libraries(
+    checks_anagram
+  PRIVATE
+    utils
+)
+
+#################################
+add_executable(two_sums two_sums.cpp)
+
+add_dependencies(two_sums  utils)
+target_link_libraries(
+    two_sums
+  PRIVATE
+    utils
+)
+
+#################################
+add_executable(palindrome palindrome.cpp)
+
+add_dependencies(palindrome  utils)
+target_link_libraries(
+    palindrome
+  PRIVATE
+    utils
+)
+
+#################################
+add_executable(valid_parentheses valid_parentheses.cpp)
+
+add_dependencies(valid_parentheses utils)
+target_link_libraries(
+    valid_parentheses
+  PRIVATE
+    utils
+)
+
+#################################
+add_executable(max_profit_stocks max_profit_stocks.cpp)
+
+add_dependencies(max_profit_stocks utils)
+target_link_libraries(
+    max_profit_stocks
+  PRIVATE
+    utils
+)
