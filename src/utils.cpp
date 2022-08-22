@@ -101,4 +101,22 @@ auto areValidParentheses(const std::string& s) -> bool {
     return removed_matching && store.empty();
 }
 
+auto maxProfit(const std::vector<int>& prices) -> int {
+    if (prices.empty())
+        return 0;
+
+    auto low  = int{prices[0]};
+    auto high = low;
+
+    std::for_each(begin(prices), end(prices), [&low, &high](const auto& p) {
+        if (p < low) {
+            low  = p;
+            high = p;
+        }
+        if (p > high)
+            high = p;
+    });
+    return high - low;
+}
+
 } // namespace utils

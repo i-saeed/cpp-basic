@@ -105,3 +105,13 @@ target_link_libraries(
   PRIVATE
     utils
 )
+
+#################################
+add_executable(max_profit_stocks max_profit_stocks.cpp)
+
+add_dependencies(max_profit_stocks utils)
+target_link_libraries(
+    max_profit_stocks
+  PRIVATE
+    utils
+)

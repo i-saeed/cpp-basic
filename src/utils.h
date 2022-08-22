@@ -33,6 +33,8 @@ auto isPalindrome(const std::string& s) -> bool;
 
 auto areValidParentheses(const std::string& s) -> bool;
 
+auto maxProfit(const std::vector<int>& prices) -> int;
+
 } // namespace utils
 
 #endif
