@@ -18,6 +18,16 @@ target_link_libraries(
     basic_data_structures
 )
 
+#################################
+add_executable(queue_using_stacks queue_using_stacks.cpp)
+
+add_dependencies(queue_using_stacks queue_using_stacks)
+target_link_libraries(
+    queue_using_stacks
+  PRIVATE
+    basic_data_structures
+)
+
 
 #################################
 add_executable(reverse_linkedlist reverse_linkedlist.cpp)
