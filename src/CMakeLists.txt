@@ -2,6 +2,7 @@ set(
   HEADER_FILES
     doublelinkedlist.h
     linkedlist.h
+    queue.h
 )
 
 add_library(
