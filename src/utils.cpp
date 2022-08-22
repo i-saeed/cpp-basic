@@ -102,21 +102,25 @@ auto areValidParentheses(const std::string& s) -> bool {
 }
 
 auto maxProfit(const std::vector<int>& prices) -> int {
+    auto profit = int{0};
+
     if (prices.empty())
         return 0;
 
     auto low  = int{prices[0]};
     auto high = low;
 
-    std::for_each(begin(prices), end(prices), [&low, &high](const auto& p) {
-        if (p < low) {
-            low  = p;
-            high = p;
-        }
-        if (p > high)
-            high = p;
-    });
-    return high - low;
+    std::for_each(begin(prices), end(prices),
+                  [&low, &high, &profit](const auto& p) {
+                      if (p < low) {
+                          low  = p;
+                          high = p;
+                      }
+
+                      high   = (p > high) ? p : high;
+                      profit = (high - low > profit) ? high - low : profit;
+                  });
+    return profit;
 }
 
 } // namespace utils

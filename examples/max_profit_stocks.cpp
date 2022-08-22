@@ -3,7 +3,6 @@
 #include <cassert>
 #include <iostream>
 #include <vector>
-//#include <string>
 
 auto main() -> int {
 
@@ -18,20 +17,10 @@ auto main() -> int {
     expected = 0;
     assert(profit == expected);
 
-    // std::string s{"()[]{}"};
-    // bool        expected{true};
-    // auto        found = utils::areValidParentheses(s);
-    // assert(found == expected);
-
-    // s        = {"()"};
-    // expected = true;
-    // found    = utils::areValidParentheses(s);
-    // assert(found == expected);
-
-    // s        = "(]";
-    // expected = false;
-    // found    = utils::areValidParentheses(s);
-    // assert(found == expected);
+    prices   = {2, 4, 1};
+    profit   = utils::maxProfit(prices);
+    expected = 2;
+    assert(profit == expected);
 
     return 0;
 }
