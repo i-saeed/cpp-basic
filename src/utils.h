@@ -11,7 +11,6 @@ namespace utils {
 
 template <typename T>
 auto containsDuplicate(const std::vector<T>& nums) -> bool {
-    auto                  contains = bool{false};
     std::unordered_set<T> hash_map;
 
     return std::any_of(begin(nums), end(nums), [&hash_map](const auto& n) {
