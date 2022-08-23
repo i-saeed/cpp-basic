@@ -24,16 +24,17 @@ class BinarySearchTree {
     TreeNode<T>* root{nullptr};
 
     auto insert(const T val, TreeNode<T>* node) -> TreeNode<T>*;
-    auto inorderTraversal(TreeNode<T>* node, const std::vector<T>& vec = {})
-        -> std::vector<T>;
+    auto inorderTraversal(TreeNode<T>* node) const -> std::vector<T>;
     auto deleteNode(TreeNode<T>* node) -> void;
 
   public:
     auto insert(const T val) -> void;
     auto empty() -> bool;
+    auto inorderTraversal() const -> std::vector<T>;
 
-    friend auto operator<<(std::ostream& s, BinarySearchTree<T>& tree)
-        -> std::ostream&;
+    template <typename t>
+    friend std::ostream& operator<<(std::ostream&              s,
+                                    const BinarySearchTree<t>& tree);
 
     ~BinarySearchTree();
 };
@@ -66,11 +67,10 @@ auto BinarySearchTree<T>::empty() -> bool {
 }
 
 template <typename T>
-auto operator<<(std::ostream& s, const BinarySearchTree<T>& tree)
-    -> std::ostream& {
+std::ostream& operator<<(std::ostream& s, const BinarySearchTree<T>& tree) {
 
     if (tree.root) {
-        auto vals = inorderTraversal(tree.root);
+        auto vals = tree.inorderTraversal();
         for (const auto& v : vals) {
             s << v << ", ";
         }
@@ -79,8 +79,7 @@ auto operator<<(std::ostream& s, const BinarySearchTree<T>& tree)
 }
 
 template <typename T>
-auto BinarySearchTree<T>::inorderTraversal(TreeNode<T>*          node,
-                                           const std::vector<T>& vec)
+auto BinarySearchTree<T>::inorderTraversal(TreeNode<T>* node) const
     -> std::vector<T> {
 
     std::vector<T> values;
@@ -100,6 +99,11 @@ auto BinarySearchTree<T>::inorderTraversal(TreeNode<T>*          node,
 template <typename T>
 BinarySearchTree<T>::~BinarySearchTree() {
     deleteNode(root);
+}
+
+template <typename T>
+auto BinarySearchTree<T>::inorderTraversal() const -> std::vector<T> {
+    return inorderTraversal(root);
 }
 
 template <typename T>

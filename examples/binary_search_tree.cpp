@@ -1,6 +1,8 @@
 #include "binarytree.h"
 
+#include <cassert>
 #include <iostream>
+#include <vector>
 
 auto main(int argc, char** argv) -> int {
 
@@ -19,6 +21,11 @@ auto main(int argc, char** argv) -> int {
     bst.insert(7);
 
     std::cout << " BST:  " << bst << std::endl;
+
+    const auto expected = std::vector<int>{1, 3, 4, 6, 7, 8, 10, 13, 14};
+    const auto obtained = bst.inorderTraversal();
+
+    assert(expected == obtained);
 
     std::cout << std::endl;
 
