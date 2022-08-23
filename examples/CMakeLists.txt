@@ -41,6 +41,16 @@ target_link_libraries(
 )
 
 #################################
+add_executable(binary_search_tree binary_search_tree.cpp)
+
+add_dependencies(binary_search_tree basic_data_structures)
+target_link_libraries(
+    binary_search_tree
+  PRIVATE
+    basic_data_structures
+)
+
+#################################
 add_executable(cycle_linked_list cycle_linked_list.cpp)
 
 add_dependencies(cycle_linked_list  basic_data_structures)
