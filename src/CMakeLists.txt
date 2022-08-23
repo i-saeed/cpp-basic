@@ -2,6 +2,7 @@ set(
   HEADER_FILES
     doublelinkedlist.h
     linkedlist.h
+    binarytree.h
 )
 
 add_library(
