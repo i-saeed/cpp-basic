@@ -26,6 +26,7 @@ class BinarySearchTree {
     auto insert(const T val, TreeNode<T>* node) -> TreeNode<T>*;
     auto inorderTraversal(TreeNode<T>* node, const std::vector<T>& vec = {})
         -> std::vector<T>;
+    auto deleteNode(TreeNode<T>* node) -> void;
 
   public:
     auto insert(const T val) -> void;
@@ -94,6 +95,20 @@ auto BinarySearchTree<T>::inorderTraversal(TreeNode<T>*          node,
     values.insert(values.end(), right_vals.begin(), right_vals.end());
 
     return values;
+}
+
+template <typename T>
+BinarySearchTree<T>::~BinarySearchTree() {
+    deleteNode(root);
+}
+
+template <typename T>
+auto BinarySearchTree<T>::deleteNode(TreeNode<T>* node) -> void {
+    if (node) {
+        deleteNode(node->left);
+        deleteNode(node->right);
+        delete node;
+    }
 }
 
 } // namespace binary_tree
