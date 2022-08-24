@@ -2,6 +2,7 @@
 #define _BINARY_TREE_H
 
 #include <iostream>
+#include <limits>
 #include <vector>
 
 namespace binary_tree {
@@ -38,6 +39,9 @@ class BinarySearchTree {
 
     ~BinarySearchTree();
 };
+
+template <typename T>
+auto verifyBST(const BinarySearchTree<T>& tree) -> bool;
 
 template <typename T>
 auto BinarySearchTree<T>::insert(const T val) -> void {
@@ -115,6 +119,30 @@ auto BinarySearchTree<T>::deleteNode(TreeNode<T>* node) -> void {
     }
 }
 
+namespace _inner {
+template <typename T>
+auto verifyBSTNode(TreeNode<T>* node, T min, T max) -> bool {
+    if (!node)
+        return true;
+
+    if (((node->val) > max) || ((node->val) < min))
+        return false;
+
+    auto verify_left  = verifyBSTNode(node->left, min, node->val);
+    auto verify_right = verifyBSTNode(node->right, node->val, max);
+    return verify_left && verify_right;
+}
+} // namespace _inner
+
+template <typename T>
+auto verifyBST(const BinarySearchTree<T>& tree) -> bool {
+
+    auto root = tree.root;
+
+    return _inner::verifyBSTNode(tree.root, std::numeric_limits<T>::min(),
+                                 std::numeric_limits<T>::max());
+}
+
 } // namespace binary_tree
 
-#endif
+#endif //_BINARY_TREE_H
